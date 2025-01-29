@@ -57,6 +57,7 @@ public class PracticeFormTest {
         WebElement maleElement = driver.findElement(By.xpath("//label[@for='gender-radio-1']"));
         WebElement femaleElement = driver.findElement(By.xpath("//label[@for='gender-radio-2']"));
         WebElement otherElement = driver.findElement(By.xpath("//label[@for='gender-radio-3']"));
+        js.executeScript("window.scrollBy(0,400)");
 
         String genderValue = "Other";
 
@@ -65,8 +66,7 @@ public class PracticeFormTest {
 
         } else if (femaleElement.getText().equals(genderValue)) {
             femaleElement.click();
-
-        } else if (otherElement.getText().equals(genderValue)) {
+        } else {
             otherElement.click();
         }
 
@@ -86,6 +86,9 @@ public class PracticeFormTest {
         js.executeScript("arguments[0].click()", cityElement);
         cityElement.sendKeys("Delhi");
         cityElement.sendKeys(Keys.ENTER);
+
+        WebElement submitElement = driver.findElement(By.id("submit"));
+        js.executeScript("arguments[0].click()", submitElement);
 
     }
 }
