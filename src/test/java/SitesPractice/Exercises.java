@@ -20,57 +20,50 @@ public class Exercises {
 
     @Test
 
-//    public void callMethods (){
-//
-//       // selectCountryMethod();
-//
-//        selectSubMenuMethod();
-//    }
-//
-//    public void selectCountryMethod (){
-//
-//        driver = new ChromeDriver();
-//        driver.get("https://letcode.in/forms");
-//        driver.manage().window().maximize();
-//
-//        List<WebElement> selects = driver.findElements(By.xpath("//form//div[@class='control']//select"));
-//        WebElement parentOfCountryCodeSelect = selects.get(0);
-//        WebElement parentOfCountrySelect = selects.get(1);
-//
-//
-//        Select listOfCountryCode = new Select(parentOfCountryCodeSelect);
-//        parentOfCountryCodeSelect.click();
-//        listOfCountryCode.selectByValue("238");
-//
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("window.scrollBy(0,300)");
-//
-//
-//        Select listOfCountry = new Select(parentOfCountrySelect);
-//        parentOfCountrySelect.click();
-//        listOfCountry.selectByValue("Cape Verde");
-//
-//    }
+    public void callMethods (){
+
+        selectCountryMethod();
+
+        selectSubMenuMethod();
+
+    }
+
+    public void selectCountryMethod (){
+
+        driver = new ChromeDriver();
+        driver.get("https://letcode.in/forms");
+        driver.manage().window().maximize();
+
+        List<WebElement> selects = driver.findElements(By.xpath("//form//div[@class='control']//select"));
+        WebElement parentOfCountryCodeSelect = selects.get(0);
+        WebElement parentOfCountrySelect = selects.get(1);
+
+
+        Select listOfCountryCode = new Select(parentOfCountryCodeSelect);
+        parentOfCountryCodeSelect.click();
+        listOfCountryCode.selectByValue("238");
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,300)");
+
+
+        Select listOfCountry = new Select(parentOfCountrySelect);
+        parentOfCountrySelect.click();
+        listOfCountry.selectByValue("Cape Verde");
+
+    }
 
     public void selectSubMenuMethod (){
 
         driver = new ChromeDriver();
         driver.get("https://www.barnesandnoble.com");
-//        driver.manage().window().maximize();
 
         WebElement subMenulink = driver.findElement(By.xpath("//a[text()='Nonfiction']/parent::li"));
         Actions actions = new Actions(driver);
         actions.moveToElement(subMenulink).perform();
 
-        WebElement bestSeller = driver.findElement(By.xpath("//a[text()='Nonfiction Bestsellers']"));
-        bestSeller.click();
-
-
-
-
-
-
-
+        WebElement siblingElement = driver.findElement(By.xpath("//a[text()='Nonfiction']/following-sibling::div"));
+        Assert.assertTrue(siblingElement.isDisplayed());
 
 
     }
