@@ -3,9 +3,11 @@ package Tests;
 import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.List;
 
 public class PracticeFormTest {
 
@@ -70,6 +72,22 @@ public class PracticeFormTest {
             otherElement.click();
         }
 
+
+        WebElement sportsElement = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-1']"));
+        WebElement readingElement = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-2']"));
+        WebElement musicElement = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-3']"));
+
+        String hobbiesValue = "Reading";
+
+        if (sportsElement.getText().equals(hobbiesValue)) {
+            sportsElement.click();
+
+        } else if (readingElement.getText().equals(hobbiesValue)) {
+            readingElement.click();
+        } else {
+            musicElement.click();
+        }
+
         WebElement subjectsElement = driver.findElement(By.id("subjectsInput"));
         String SubjectsValue = "Social Studies";
         subjectsElement.sendKeys(SubjectsValue);
@@ -89,6 +107,50 @@ public class PracticeFormTest {
 
         WebElement submitElement = driver.findElement(By.id("submit"));
         js.executeScript("arguments[0].click()", submitElement);
+
+
+        List<WebElement> getRows = driver.findElements(By.xpath("//table[@class='table table-dark table-striped table-bordered table-hover']/tbody/tr"));
+
+        WebElement studentNameRow = getRows.get(0);
+        String studentNameRowSecondTdValueText = studentNameRow.findElement(By.xpath("./td[2]")).getText();
+
+        Assert.assertEquals(studentNameRowSecondTdValueText, "Anca Creta");
+
+        WebElement studentEmailRow = getRows.get(1);
+        String studentEmailRowSecondTdValueText = studentEmailRow.findElement(By.xpath("./td[2]")).getText();
+
+        Assert.assertEquals(studentEmailRowSecondTdValueText, "anca.creta@yahoo.com");
+
+        WebElement genderRow = getRows.get(2);
+        String genderRowSecondTdValueText = genderRow.findElement(By.xpath("./td[2]")).getText();
+
+        Assert.assertEquals(genderRowSecondTdValueText, "Other");
+
+        WebElement mobileRow = getRows.get(3);
+        String mobileRowSecondTdValueText = mobileRow.findElement(By.xpath("./td[2]")).getText();
+
+        Assert.assertEquals(mobileRowSecondTdValueText, "0748549322");
+
+        WebElement dateOfBirthdayRow = getRows.get(4);
+        String dateOfBirthdayRowSecondTdValueText = dateOfBirthdayRow.findElement(By.xpath("./td[2]")).getText();
+
+        Assert.assertEquals(dateOfBirthdayRowSecondTdValueText, "25 February,2025");
+
+        WebElement subjectsRow = getRows.get(5);
+        String subjectsRowSecondTdValueText = subjectsRow.findElement(By.xpath("./td[2]")).getText();
+
+        Assert.assertEquals(subjectsRowSecondTdValueText, "Social Studies");
+
+        WebElement hobbiesRow = getRows.get(6);
+        String hobbiesRowSecondTdValueText = hobbiesRow.findElement(By.xpath("./td[2]")).getText();
+
+        Assert.assertEquals(hobbiesRowSecondTdValueText, "Reading");
+
+
+        WebElement stateRow = getRows.get(9);
+        String stateRowSecondTdValueText = stateRow.findElement(By.xpath("./td[2]")).getText();
+
+        Assert.assertEquals(stateRowSecondTdValueText, "NCR Delhi");
 
     }
 }

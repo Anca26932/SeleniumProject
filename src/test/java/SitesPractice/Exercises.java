@@ -22,9 +22,9 @@ public class Exercises {
 
     public void callMethods (){
 
-        selectCountryMethod();
+//        selectCountryMethod();
 
-        selectSubMenuMethod();
+       selectSubMenuMethod();
 
     }
 
@@ -33,6 +33,30 @@ public class Exercises {
         driver = new ChromeDriver();
         driver.get("https://letcode.in/forms");
         driver.manage().window().maximize();
+
+//        WebElement firstNameField = driver.findElement(By.id("firstname"));
+//        String firstNameValue = "Anca";
+//        firstNameField.sendKeys(firstNameValue);
+//
+//        WebElement lastNameField = driver.findElement(By.id("lasttname"));
+//        String lastNameValue = "Creta";
+//        lastNameField.sendKeys(lastNameValue);
+//
+//        WebElement inputField = driver.findElement(By.id("email"));
+//        inputField.clear();
+//
+//        WebElement emailField = driver.findElement(By.id("email"));
+//        String emailValue = "anca.creta@yahoo.com";
+//        emailField.sendKeys(emailValue);
+//
+//        WebElement phoneNumberField = driver.findElement(By.id("Phno"));
+//        String phoneNumberValue = "+40748549322";
+//        phoneNumberField.sendKeys(phoneNumberValue);
+//
+//        WebElement adressLine1Field = driver.findElement(By.id("Addl1"));
+//        String phoneNumberValue = "+40748549322";
+//        phoneNumberField.sendKeys(phoneNumberValue);
+
 
         List<WebElement> selects = driver.findElements(By.xpath("//form//div[@class='control']//select"));
         WebElement parentOfCountryCodeSelect = selects.get(0);
@@ -51,6 +75,10 @@ public class Exercises {
         parentOfCountrySelect.click();
         listOfCountry.selectByValue("Cape Verde");
 
+        WebElement postalCodefield = driver.findElement(By.id("postalcode"));
+        String postalCodeValue ="407208";
+        postalCodefield.sendKeys(postalCodeValue);
+
     }
 
     public void selectSubMenuMethod (){
@@ -60,15 +88,11 @@ public class Exercises {
 
         WebElement subMenulink = driver.findElement(By.xpath("//a[text()='Nonfiction']/parent::li"));
         Actions actions = new Actions(driver);
-        actions.moveToElement(subMenulink).perform();
+        actions.moveToElement(subMenulink).pause(500).perform();
 
         WebElement siblingElement = driver.findElement(By.xpath("//a[text()='Nonfiction']/following-sibling::div"));
         Assert.assertTrue(siblingElement.isDisplayed());
-
-
+        actions.moveToElement(siblingElement).pause(500).click().perform();
+        Assert.assertTrue(driver.getTitle().contains("Nonfiction"));
     }
-
-
-
-
 }
