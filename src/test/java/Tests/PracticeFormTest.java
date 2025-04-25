@@ -1,76 +1,63 @@
 package Tests;
 
+import HelperMethods.ElementsMethods;
 import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeFormTest {
-
-    public WebDriver driver;
-//ne defineste variabila globala driver
+    public WebDriver driver;  //ne defineste variabila globala driver
+    public ElementsMethods elementMethods;
 
     @Test
     public void automationMethod() {
-
         //deschidem un browser de Chrome
         driver = new ChromeDriver();
-
         //accesam o pagina web
         driver.get("https://demoqa.com/");
-
         //facem browser-ul in mod maximisize
         driver.manage().window().maximize();
-
+        elementMethods = new ElementsMethods(driver);
+        //declaram un element
+        WebElement elementsField = driver.findElement(By.xpath("//h5[text()='Forms']"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,400)");
+        js.executeScript("window.scrollBy(0,400)"); //x=0 ,y=400 (axa)
+        elementMethods.clickOnElements(elementsField);
 
-        WebElement formElement = driver.findElement(By.xpath("//h5[text()='Forms']"));
-        formElement.click();
+        WebElement elementsTable = driver.findElement(By.xpath("//span[text()='Practice Form']"));
+        elementMethods.clickOnElements(elementsTable);
 
-        WebElement practiceformElement = driver.findElement(By.xpath("//span[text()='Practice Form']"));
-        practiceformElement.click();
+        WebElement addFirstName = driver.findElement(By.id("firstName"));
+        elementMethods.fillElement(addFirstName, "Anca");
 
-        WebElement firstNameElement = driver.findElement(By.id("firstName"));
-        String firstnameValue = "Anca";
-        firstNameElement.sendKeys(firstnameValue);
+        WebElement addLastName = driver.findElement(By.id("lastName"));
+        elementMethods.fillElement(addLastName,"Creta");
 
-        WebElement lastNameElement = driver.findElement(By.id("lastName"));
-        String lastNamevalue = "Creta";
-        lastNameElement.sendKeys(lastNamevalue);
+        WebElement addEmail = driver.findElement(By.id("userEmail"));
+        elementMethods.fillElement(addEmail,"anca.creta@yahoo.com");
 
-        WebElement userEmailElement = driver.findElement(By.id("userEmail"));
-        String userEmailValue = "anca.creta@yahoo.com";
-        userEmailElement.sendKeys(userEmailValue);
+        WebElement addMobile = driver.findElement(By.cssSelector("input[placeholder='Mobile Number']"));
+        elementMethods.fillElement(addMobile,"0748549322");
 
-        WebElement mobilenumberElement = driver.findElement(By.cssSelector("input[placeholder='Mobile Number']"));
-        String mobilenumberValue = "0748549322";
-        mobilenumberElement.sendKeys(mobilenumberValue);
-
-        WebElement pictureElement = driver.findElement(By.id("uploadPicture"));
-
-        File file = new File("src/test/resources/1.jpeg");
-        pictureElement.sendKeys(file.getAbsolutePath());
+        WebElement addPicture = driver.findElement(By.id("uploadPicture"));
+        elementMethods.uploadPicture(addPicture);
 
         WebElement maleElement = driver.findElement(By.xpath("//label[@for='gender-radio-1']"));
         WebElement femaleElement = driver.findElement(By.xpath("//label[@for='gender-radio-2']"));
         WebElement otherElement = driver.findElement(By.xpath("//label[@for='gender-radio-3']"));
         js.executeScript("window.scrollBy(0,400)");
+        List<WebElement> genderElement = new ArrayList<>();
+        genderElement.add(maleElement);
+        genderElement.add(femaleElement);
+        genderElement.add(otherElement);
 
-        String genderValue = "Other";
+        elementMethods.selectElementFromListByText(genderElement,"Female");
 
-        if (maleElement.getText().equals(genderValue)) {
-            maleElement.click();
-
-        } else if (femaleElement.getText().equals(genderValue)) {
-            femaleElement.click();
-        } else {
-            otherElement.click();
-        }
 
 
         WebElement sportsElement = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-1']"));
