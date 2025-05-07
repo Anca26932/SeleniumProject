@@ -2,6 +2,9 @@ package Tests;
 
 import HelperMethods.AlertMethods;
 import HelperMethods.ElementsMethods;
+import HelperMethods.JavascriptHelpers;
+import Pages.CommonPage;
+import Pages.HomePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -12,8 +15,11 @@ import java.time.Duration;
 
 public class AlertTest {
     public WebDriver driver;
-    public ElementsMethods elementsMethods;
-    public AlertMethods alertMethods;
+    ElementsMethods elementsMethods;
+    AlertMethods alertMethods;
+    JavascriptHelpers javascriptHelpers;
+    HomePage homePage;
+    CommonPage commonPage;
 
     @Test
     public void automationMethod() {
@@ -27,24 +33,29 @@ public class AlertTest {
         driver.manage().window().maximize();
         elementsMethods = new ElementsMethods(driver);
         alertMethods = new AlertMethods(driver);
+        javascriptHelpers = new JavascriptHelpers(driver);
+        homePage = new HomePage(driver);
+        commonPage = new CommonPage(driver);
 
-        WebElement alertFrameWindowElement = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,400)");
-        elementsMethods.clickOnElements(alertFrameWindowElement);
+//        javascriptHelpers.scrollDown(400);
+//
+//        WebElement alertFrameAndWindowElement = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
+//        elementsMethods.clickOnElements(alertFrameAndWindowElement);
+        homePage.goToDesiredMenu("Alerts, Frame & Windows");
+//
 
-
-        WebElement alertElement = driver.findElement(By.xpath("//span[text()='Alerts']"));
-        elementsMethods.clickOnElements(alertElement);
+//        WebElement alertsElement = driver.findElement(By.xpath("//span[text()='Alerts']"));
+//        elementsMethods.clickOnElements(alertsElement);
+        commonPage.goToDesiredSubMenu("Alerts");
 
 
         WebElement alertOKElement = driver.findElement(By.id("alertButton"));
-        elementsMethods.clickOnElements(alertOKElement);
+        elementsMethods.clickOnElement(alertOKElement);
         alertMethods.interractWithAlertsOK();
 
 
         WebElement alertDelayOKElement = driver.findElement(By.id("timerAlertButton"));
-        elementsMethods.clickOnElements(alertDelayOKElement);
+        elementsMethods.clickOnElement(alertDelayOKElement);
 
 //        Definim un wait explicit ca sa astepte dupa alerta
         alertMethods.interrectWithDelayAlert();

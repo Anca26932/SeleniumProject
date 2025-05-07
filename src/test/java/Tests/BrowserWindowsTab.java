@@ -1,5 +1,11 @@
 package Tests;
 
+import HelperMethods.AlertMethods;
+import HelperMethods.ElementsMethods;
+import HelperMethods.JavascriptHelpers;
+import HelperMethods.WindowsMethods;
+import Pages.CommonPage;
+import Pages.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +20,12 @@ import java.util.List;
 public class BrowserWindowsTab {
 
     public WebDriver driver;
-//ne defineste variabila globala driver
+    WindowsMethods windowsMethods;
+    ElementsMethods elementsMethods;
+    JavascriptHelpers javascriptHelpers;
+    HomePage homePage;
+    CommonPage commonPage;
+
 
     @Test
     public void automationMethod() {
@@ -25,33 +36,42 @@ public class BrowserWindowsTab {
         //accesam o pagina web
         driver.get("https://demoqa.com/");
 
-
         //facem browser-ul in mod maximisize
         driver.manage().window().maximize();
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,400)");
 
-        WebElement alertFrameWindowElement = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        alertFrameWindowElement.click();
+        elementsMethods = new ElementsMethods(driver);
+        windowsMethods = new WindowsMethods(driver);
+        javascriptHelpers = new JavascriptHelpers(driver);
+        homePage = new HomePage(driver);
+        commonPage = new CommonPage(driver);
 
-        WebElement browserWindowsElement = driver.findElement(By.xpath("//span[text()='Browser Windows']"));
-        browserWindowsElement.click();
 
-        WebElement tabButtonElement = driver.findElement(By.id("tabButton"));
-        tabButtonElement.click();
+//        javascriptHelpers.scrollDown(400);
+//
+//        WebElement alertsFrameAndWindowElement = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
+//        elementsMethods.clickOnElement(alertsFrameAndWindowElement);
+        homePage.goToDesiredMenu("Alerts, Frame & Windows");
 
-        //returneaza windowsurile deschise
-        List<String> tablist = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tablist.get(1));
+//        WebElement browserWindowsElement = driver.findElement(By.xpath("//span[text()='Browser Windows']"));
+//        elementsMethods.clickOnElement(browserWindowsElement);
+        commonPage.goToDesiredSubMenu("Browser Windows");
 
+        WebElement newTabButtonElement = driver.findElement(By.id("tabButton"));
+        elementsMethods.clickOnElement(newTabButtonElement);
+
+        windowsMethods.switchToOpenedTab();
+
+//        //returneaza windowsurile deschise
+//        List<String> tablist = new ArrayList<>(driver.getWindowHandles());
+//        driver.switchTo().window(tablist.get(1));
 
         WebElement sampleHeadingElement = driver.findElement(By.id("sampleHeading"));
         System.out.println("Textul din new tab este: " + sampleHeadingElement.getText());
 
-        driver.close();
+//        driver.close(); =>inchide doar fereastra curenta, nu tot browserul
 
-        driver.switchTo().window(tablist.get(0));
+       windowsMethods.switchToMainTab();
 
         WebElement windowButtonElement = driver.findElement(By.id("windowButton"));
         windowButtonElement.click();

@@ -1,6 +1,9 @@
 package Tests;
 
 import HelperMethods.ElementsMethods;
+import HelperMethods.JavascriptHelpers;
+import Pages.CommonPage;
+import Pages.HomePage;
 import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,8 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeFormTest {
-    public WebDriver driver;  //ne defineste variabila globala driver
-    public ElementsMethods elementMethods;
+     WebDriver driver;  //ne defineste variabila globala driver
+     ElementsMethods elementMethods;
+     JavascriptHelpers javascriptHelpers;
+     HomePage homePage;
+     CommonPage commonPage;
+
 
     @Test
     public void automationMethod() {
@@ -21,16 +28,36 @@ public class PracticeFormTest {
         //accesam o pagina web
         driver.get("https://demoqa.com/");
         //facem browser-ul in mod maximisize
-        driver.manage().window().maximize();
-        elementMethods = new ElementsMethods(driver);
-        //declaram un element
-        WebElement elementsField = driver.findElement(By.xpath("//h5[text()='Forms']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,400)"); //x=0 ,y=400 (axa)
-        elementMethods.clickOnElements(elementsField);
 
-        WebElement elementsTable = driver.findElement(By.xpath("//span[text()='Practice Form']"));
-        elementMethods.clickOnElements(elementsTable);
+
+        driver.manage().window().maximize();
+
+        elementMethods = new ElementsMethods(driver);
+        javascriptHelpers = new JavascriptHelpers(driver);
+        homePage = new HomePage(driver);
+        commonPage = new CommonPage(driver);
+
+//        Facem un scroll ca sa fie elementul vizibil
+//        In caz ca nu incape pe pagina
+
+//        javascriptHelpers.scrollDown(400);
+
+          //declaram un element
+
+//        WebElement formsElement = driver.findElement(By.xpath("//h5[text()='Forms']"));
+//        elementMethods.selectElementFromListByText(formsElement);
+
+//        List <WebElement> elements = driver.findElements(By.xpath("//h5"));
+//        elementMethods.selectElementFromListByText(elements, "Forms");
+
+        homePage.goToDesiredMenu("Forms");
+
+//        List <WebElement> subElementsList = driver.findElements(By.xpath("//span[@class='text']"));
+//        elementMethods.selectElementFromListByText(subElementsList,"Practice Form");
+
+        commonPage.goToDesiredSubMenu("Practice Form");
+
+        javascriptHelpers.scrollDown(400);
 
         WebElement addFirstName = driver.findElement(By.id("firstName"));
         elementMethods.fillElement(addFirstName, "Anca");
@@ -50,7 +77,8 @@ public class PracticeFormTest {
         WebElement maleElement = driver.findElement(By.xpath("//label[@for='gender-radio-1']"));
         WebElement femaleElement = driver.findElement(By.xpath("//label[@for='gender-radio-2']"));
         WebElement otherElement = driver.findElement(By.xpath("//label[@for='gender-radio-3']"));
-        js.executeScript("window.scrollBy(0,400)");
+        javascriptHelpers.scrollDown(400);
+
         List<WebElement> genderElement = new ArrayList<>();
         genderElement.add(maleElement);
         genderElement.add(femaleElement);
@@ -80,20 +108,20 @@ public class PracticeFormTest {
         subjectsElement.sendKeys(SubjectsValue);
         subjectsElement.sendKeys(Keys.ENTER);
 
-        js.executeScript("window.scrollBy(0,400)");
+        javascriptHelpers.scrollRight(20);
 
         WebElement stateElement = driver.findElement(By.id("react-select-3-input"));
-        js.executeScript("arguments[0].click()", stateElement);
+        elementMethods.clickOnElement(stateElement);
         stateElement.sendKeys("NCR");
         stateElement.sendKeys(Keys.ENTER);
 
         WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
-        js.executeScript("arguments[0].click()", cityElement);
+        elementMethods.clickOnElement(cityElement);
         cityElement.sendKeys("Delhi");
         cityElement.sendKeys(Keys.ENTER);
 
         WebElement submitElement = driver.findElement(By.id("submit"));
-        js.executeScript("arguments[0].click()", submitElement);
+        elementMethods.clickOnElement(submitElement);
 
 
         List<WebElement> getRows = driver.findElements(By.xpath("//table[@class='table table-dark table-striped table-bordered table-hover']/tbody/tr"));

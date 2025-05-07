@@ -13,10 +13,11 @@ public class ElementsMethods {
         this.driver = driver;
     }
 
-    public void clickOnElements(WebElement element){
+       public void clickOnElement(WebElement element){
+
         element.click();
     }
-    public void fillElement(WebElement element, String value){
+        public void fillElement(WebElement element, String value){
         element.sendKeys(value);
 
     }
@@ -29,11 +30,26 @@ public class ElementsMethods {
     public void selectElementFromListByText(List<WebElement> elementsList,String value){
         for(int i =0; i <elementsList.size();i++){
             if(elementsList.get(i).getText().equals(value)){
-                clickOnElements(elementsList.get(i));
+                clickOnElement(elementsList.get(i));
+                break;
             }
 
         }
 
+//    public void fillMultipleValues(WebElement element,List<String>values){
+//            for (String value : values){
+//                for (WebElement element:elements){
+//                    if (element.getText().equals(value)){
+//                        element.click();
+//                    }
+//                }
+//            }
+//
+//        }
+
+    }
+    public void displayContentOfElement(WebElement element){
+        System.out.println("Textul din element este:" + element.getText());
     }
 
 }

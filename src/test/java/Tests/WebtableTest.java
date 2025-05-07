@@ -1,5 +1,9 @@
 package Tests;
 
+import HelperMethods.ElementsMethods;
+import HelperMethods.JavascriptHelpers;
+import Pages.CommonPage;
+import Pages.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +16,16 @@ import java.util.List;
 
 import static java.awt.SystemColor.window;
 
+
 public class WebtableTest {
 
-    public WebDriver driver;
+    WebDriver driver;
+    JavascriptHelpers javascriptHelpers;
+    ElementsMethods elementsMethods;
+    HomePage homePage;
+
+    CommonPage commonPage;
+
 
     @Test
     public void automationMethod (){
@@ -28,51 +39,58 @@ public class WebtableTest {
         //facem browser-ul in mod maximisize
         driver.manage().window().maximize();
 
-        //
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,1000)");
+        elementsMethods = new ElementsMethods(driver);
+        javascriptHelpers = new JavascriptHelpers(driver);
+        homePage = new HomePage(driver);
+        commonPage = new CommonPage(driver);
 
 
+//       javascriptHelpers.scrollDown(400);
+       //declaram un element
 
-        //declaram un element
+//        WebElement elementsField=driver.findElement(By.xpath("//h5[text()='Elements']"));
+//        elementsMethods.clickOnElement(elementsField);
+        homePage.goToDesiredMenu("Elements");
 
-        WebElement Elementsfield=driver.findElement(By.xpath("//h5[text()='Elements']"));
-        Elementsfield.click();
-
-        WebElement Webtablefield=driver.findElement(By.xpath("//span[text()='Web Tables']"));
-        Webtablefield.click();
+//        WebElement webTablesField=driver.findElement(By.xpath("//span[text()='Web Tables']"));
+//        elementsMethods.clickOnElement(webTablesField);
+        commonPage.goToDesiredSubMenu("Web Tables");
 
         List<WebElement> tableElements = driver.findElements(By.xpath("//div[@class='rt-tbody']/div[@class='rt-tr-group']/div[contains(@class, 'rt-tr -even') or contains(@class, 'rt-tr -odd')]"));
-
         Integer actualTableSize = tableElements.size();
         Assert.assertEquals(tableElements.size(), 3);
 
-        WebElement Addfield=driver.findElement(By.id("addNewRecordButton"));
-        Addfield.click();
+        WebElement addNewRecoordButton=driver.findElement(By.id("addNewRecordButton"));
+        elementsMethods.clickOnElement(addNewRecoordButton);
 
-        WebElement FirstNamefield=driver.findElement(By.id("firstName"));
-        String firstnameValue="Anca";
-        FirstNamefield.sendKeys(firstnameValue);
+//        Declarearea valorilor cu care se populeaza formul
+        String firstNameValue = "Anca";
+        String lastNameValue = "Creta";
+        String emailValue = "anca.creta@yahoo.com";
+        String ageValue = "30";
+        String salaryValue = "1000";
+        String departamentValue = "Marketing";
 
-        WebElement LastNamefield=driver.findElement(By.id("lastName"));
-        String lastnameValue="Creta";
-        LastNamefield.sendKeys(lastnameValue);
 
-        WebElement Emailfield=driver.findElement(By.id("userEmail"));
-        String emailValue="anca.creta@yahoo.com";
-        Emailfield.sendKeys(emailValue);
+        WebElement firstNamefield=driver.findElement(By.id("firstName"));
+        elementsMethods.fillElement(firstNamefield,firstNameValue);
 
-        WebElement Agefield=driver.findElement(By.id("age"));
-        String ageValue="30";
-        Agefield.sendKeys(ageValue);
+        WebElement lastNamefield=driver.findElement(By.id("lastName"));
+        elementsMethods.fillElement(lastNamefield,lastNameValue);
 
-        WebElement Sallaryfield=driver.findElement(By.id("salary"));
-        String sallaryValue="8000";
-        Sallaryfield.sendKeys(sallaryValue);
+        WebElement emailField=driver.findElement(By.id("userEmail"));
+        elementsMethods.fillElement(emailField,emailValue);
 
-        WebElement Departmentfield=driver.findElement(By.id("department"));
-        String departamentValue="QA";
-        Departmentfield.sendKeys(departamentValue);
+        WebElement ageField=driver.findElement(By.id("age"));
+       elementsMethods.fillElement(ageField,ageValue);
+
+        WebElement salaryfield=driver.findElement(By.id("salary"));
+        elementsMethods.fillElement(salaryfield,salaryValue);
+
+
+        WebElement departmentField=driver.findElement(By.id("department"));
+        elementsMethods.fillElement(departmentField,departamentValue);
+
 
         WebElement Submmitfield=driver.findElement(By.id("submit"));
         Submmitfield.click();
@@ -83,11 +101,11 @@ public class WebtableTest {
         Assert.assertEquals(expectedTableElements.size(),expectedTableSize);
 
         String actualTableValue = expectedTableElements.get(3).getText();
-        Assert.assertTrue(actualTableValue.contains(firstnameValue));
-        Assert.assertTrue(actualTableValue.contains(lastnameValue));
+        Assert.assertTrue(actualTableValue.contains(firstNameValue));
+        Assert.assertTrue(actualTableValue.contains(lastNameValue));
         Assert.assertTrue(actualTableValue.contains(emailValue));
         Assert.assertTrue(actualTableValue.contains(ageValue));
-        Assert.assertTrue(actualTableValue.contains(sallaryValue));
+        Assert.assertTrue(actualTableValue.contains(salaryValue));
         Assert.assertTrue(actualTableValue.contains(departamentValue));
 
 

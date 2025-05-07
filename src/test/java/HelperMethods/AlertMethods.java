@@ -23,7 +23,6 @@ public class AlertMethods {
         wait.until(ExpectedConditions.alertIsPresent());
 
     }
-
     public void interrectWithDelayAlert(){
         explicitAlertWait();
         Alert alertDelayOK = driver.switchTo().alert();
