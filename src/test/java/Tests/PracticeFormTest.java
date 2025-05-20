@@ -5,6 +5,7 @@ import HelperMethods.JavascriptHelpers;
 import Pages.CommonPage;
 import Pages.HomePage;
 import Pages.PracticeFormPage;
+import ShareData.ShareData;
 import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,23 +16,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PracticeFormTest {
-    WebDriver driver;  //ne defineste variabila globala driver
+public class PracticeFormTest extends ShareData {
+
     ElementsMethods elementMethods;
+
     JavascriptHelpers javascriptHelpers;
 
     HomePage homePage;
+
     CommonPage commonPage;
+
     PracticeFormPage practiceFormPage;
 
     @Test
-    public void automationMethod() {
+    public void automationMethod() throws InterruptedException {
 
-        driver = new ChromeDriver();
-
-        driver.get("https://demoqa.com/");
-
-        driver.manage().window().maximize();
 
         elementMethods = new ElementsMethods(driver);
 
@@ -53,18 +52,22 @@ public class PracticeFormTest {
 
         practiceFormPage.completeFirstRegion("Anca", "Creta", "anca.creta@yahoo.com", "Razaoare 7B", "0737138519");
         practiceFormPage.completeGender("Male");
-//        practiceFormPage.completeSubject("English");
+        practiceFormPage.completeSubject("English");
 
-        List<String> subject = new ArrayList<>();
-        subject.add("Maths");
-        subject.add("English");
-        practiceFormPage.completeSubjectWithList(subject);
+//        List<String> subject = new ArrayList<>();
+//        subject.add("Maths");
+//        subject.add("English");
+//        practiceFormPage.completeSubjectWithList(subject);
 
         List<String> hobbies = new ArrayList<>();
         hobbies.add("Sports");
         hobbies.add("Music");
         hobbies.add("Reading");
+
         practiceFormPage.completeHobbies(hobbies);
+
+        practiceFormPage.completeState("NCR","New-Delhi");
+        practiceFormPage.submit();
 
 
 //        WebElement formsElement = driver.findElement(By.xpath("//h5[text()='Forms']"));

@@ -8,6 +8,7 @@ public class FramesMethods {
 
     public FramesMethods(WebDriver driver){
         this.driver = driver;
+
     }
 
     public void switchToFrame(WebElement element){

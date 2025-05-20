@@ -4,26 +4,28 @@ import HelperMethods.ElementsMethods;
 import HelperMethods.JavascriptHelpers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PracticeFormPage {
+public class PracticeFormPage extends CommonPage {
 
-    WebDriver driver;
-    ElementsMethods elementsMethods;
-    JavascriptHelpers javascriptHelpers;
-
-    public PracticeFormPage(WebDriver driver) {
-        this.driver = driver;
-        this.elementsMethods = new ElementsMethods(driver);
-        this.javascriptHelpers = new JavascriptHelpers(driver);
-        PageFactory.initElements(driver, this);
-
-
-    }
+//    WebDriver driver;
+//    ElementsMethods elementsMethods;
+//    JavascriptHelpers javascriptHelpers;
+//    Actions actions;
+//
+//    public PracticeFormPage(WebDriver driver) {
+//        this.driver = driver;
+//        this.elementsMethods = new ElementsMethods(driver);
+//        this.javascriptHelpers = new JavascriptHelpers(driver);
+//        PageFactory.initElements(driver, this);
+//
+//
+//    }
 
     @FindBy(id = "firstName")
     WebElement firstNameElement;
@@ -70,6 +72,16 @@ public class PracticeFormPage {
     @FindBy(xpath = "//div[@id='subjectsContainer']")
     WebElement subjectsElement;
 
+    @FindBy(id = "uploadPicture")
+    WebElement pictureElement;
+
+    @FindBy(id="submit")
+    WebElement submitElement;
+
+    public PracticeFormPage(WebDriver driver) {
+        super(driver);
+    }
+
 //    @FindBy(id = "subjectsInput")
 //    WebElement subjectsElement;
 
@@ -107,6 +119,9 @@ public class PracticeFormPage {
 
 
     }
+    public void uploadPicture(WebElement element){ elementsMethods.uploadPicture(pictureElement);
+
+    }
     public void completeHobbies(List<String> hobbies){
         List<WebElement> hobbiesElement = new ArrayList<>();
                 hobbiesElement.add(sportsElement);
@@ -114,6 +129,19 @@ public class PracticeFormPage {
                 hobbiesElement.add(musicElement);
                 elementsMethods.clickMultipleValue(hobbiesElement ,hobbies);
 
+    }
+    public void completeState(String state, String city){
+        javascriptHelpers.forceClick(stateElement);
+//        elementsMethods.clickOnElement(stateElement);
+        elementsMethods.waitForVisibilityElement(stateElement);
+        elementsMethods.fillWithActions(stateElement , state);
+        javascriptHelpers.forceClick(stateElement);
+//        elementsMethods.clickOnElement(cityElement);
+        elementsMethods.waitForVisibilityElement(cityElement);
+        elementsMethods.fillWithActions(cityElement,city);
+    }
+    public void submit(){
+        submitElement.submit();
     }
 
 }

@@ -49,6 +49,13 @@ public class WindowsMethods {
         List<String> tabList = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabList.get(0));
     }
+    public void waitForSeconds() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // bună practică
+        }
+    }
 
 
 }

@@ -3,81 +3,88 @@ package Tests;
 import HelperMethods.AlertMethods;
 import HelperMethods.ElementsMethods;
 import HelperMethods.JavascriptHelpers;
+import Pages.AlertsPage;
 import Pages.CommonPage;
 import Pages.HomePage;
+import ShareData.ShareData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
 import java.time.Duration;
 
-public class AlertTest {
-    public WebDriver driver;
+public class AlertTest extends ShareData {
+
     ElementsMethods elementsMethods;
     AlertMethods alertMethods;
     JavascriptHelpers javascriptHelpers;
     HomePage homePage;
     CommonPage commonPage;
+    AlertsPage alertsPage;
+
 
     @Test
     public void automationMethod() {
-        //deschidem un browser de Chrome
-        driver = new ChromeDriver();
-        //accesam o pagina web
-        driver.get("https://demoqa.com/");
-        //definim un wait implicit pentru un interval maxim de timp
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        //facem browser-ul in mod maximisize
-        driver.manage().window().maximize();
+
         elementsMethods = new ElementsMethods(driver);
         alertMethods = new AlertMethods(driver);
         javascriptHelpers = new JavascriptHelpers(driver);
         homePage = new HomePage(driver);
         commonPage = new CommonPage(driver);
+        alertsPage = new AlertsPage(driver);
 
 //        javascriptHelpers.scrollDown(400);
-//
-//        WebElement alertFrameAndWindowElement = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-//        elementsMethods.clickOnElements(alertFrameAndWindowElement);
-        homePage.goToDesiredMenu("Alerts, Frame & Windows");
-//
 
-//        WebElement alertsElement = driver.findElement(By.xpath("//span[text()='Alerts']"));
-//        elementsMethods.clickOnElements(alertsElement);
+        homePage.goToDesiredMenu("Alerts, Frame & Windows");
+
         commonPage.goToDesiredSubMenu("Alerts");
 
+        alertsPage.simpleAlert();
+        alertsPage.alertDeLay();
+        alertsPage.alertConfirmation();
+        alertsPage.alertPrompt();
 
-        WebElement alertOKElement = driver.findElement(By.id("alertButton"));
-        elementsMethods.clickOnElement(alertOKElement);
-        alertMethods.interractWithAlertsOK();
+//        trigaruieste o alerta
+//        Cum interactionam cu alerta : Alert alertOk = driver.SwitchTo.alert()
+//        switch to se muta cu focusul pe o alerta
+//        ce putem face cu aceasta alerta? sa apasam ok pe ea
+//        ne mutam cu focusul si apoi luam o decizie .in cazul nostru functioneaza doar cu ok
+//        alertOk.accept();
 
-
-        WebElement alertDelayOKElement = driver.findElement(By.id("timerAlertButton"));
-        elementsMethods.clickOnElement(alertDelayOKElement);
+//        WebElement alertOKElement = driver.findElement(By.id("alertButton"));
+//        elementsMethods.clickOnElement(alertOKElement);
+//        alertMethods.interactWithAlertsOK();
 
 //        Definim un wait explicit ca sa astepte dupa alerta
-        alertMethods.interrectWithDelayAlert();
-//        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        //WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 //        wait.until(ExpectedConditions.alertIsPresent());
-//
 //        Alert alertDelayOK = driver.switchTo().alert();
 //        alertDelayOK.accept();
 
-        WebElement alertConfirmationElement = driver.findElement(By.id("confirmButton"));
-        alertConfirmationElement.click();
-
-        Alert alertConfirmation = driver.switchTo().alert();
-        alertConfirmation.dismiss();
+//       WebElement alertDelayOKElement = driver.findElement(By.id("timerAlertButton"));
+//       elementsMethods.clickOnElement(alertDelayOKElement);
+//       alertMethods.interactWithDelayAlert();
 
 
-        WebElement alertPromtElement = driver.findElement(By.id("promtButton"));
-        alertPromtElement.click();
+//
+//        WebElement alertConfirmationElement = driver.findElement(By.id("confirmButton"));
+//        alertConfirmationElement.click();
+//        Alert alertConfirmation = driver.switchTo().alert();
+//        alertConfirmation.dismiss();
+//        elementsMethods.clickOnElement(alertConfirmationElement);
+//        alertMethods.interactWithConfirmationAlert();
 
-        Alert alertPromt = driver.switchTo().alert();
-        alertPromt.sendKeys("Anca");
-        alertPromt.accept();
+
+//        WebElement alertPromptElement = driver.findElement(By.id("promptButton"));
+//        elementsMethods.clickOnElement(alertPromptElement);
+//        alertMethods.interactWithPromptAlert();
+
+//        Alert alertPrompt = driver.switchTo().alert();
+//        alertPrompt.sendKeys("Anca");
+//        alertPrompt.accept();
 
     }
 }

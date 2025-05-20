@@ -13,7 +13,7 @@ public class AlertMethods {
     public AlertMethods(WebDriver driver) {
         this.driver = driver;
     }
-    public void interractWithAlertsOK(){
+    public void interactWithAlertsOK(){
         Alert alertOk = driver.switchTo().alert();
         alertOk.accept();
     }
@@ -23,9 +23,21 @@ public class AlertMethods {
         wait.until(ExpectedConditions.alertIsPresent());
 
     }
-    public void interrectWithDelayAlert(){
+    public void interactWithDelayAlert(){
         explicitAlertWait();
         Alert alertDelayOK = driver.switchTo().alert();
         alertDelayOK.accept();
+    }
+    public void interactWithConfirmationAlert(){
+        Alert alertConfirmation = driver.switchTo().alert();
+        alertConfirmation.dismiss();
+
+    }
+    public void interactWithPromptAlert(){
+        Alert alertPrompt = driver.switchTo().alert();
+        alertPrompt.sendKeys("Anca");
+        alertPrompt.accept();
+
+
     }
 }
