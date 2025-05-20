@@ -18,11 +18,6 @@ import org.testng.annotations.Test;
 
 public class Frames extends ShareData {
 
-    JavascriptHelpers javascriptHelpers;
-
-    ElementsMethods elementsMethods;
-
-    FramesMethods framesMethods;
 
     HomePage homePage;
 
@@ -34,21 +29,17 @@ public class Frames extends ShareData {
     @Test
     public void automationMethod() throws InterruptedException {
 
-        javascriptHelpers = new JavascriptHelpers(driver);
 
-        elementsMethods = new ElementsMethods(driver);
 
-        framesMethods = new FramesMethods(driver);
+        homePage = new HomePage(getDriver());
 
-        homePage = new HomePage(driver);
+        commonPage = new CommonPage(getDriver());
 
-        commonPage = new CommonPage(driver);
-
-        framesPage = new FramesPage(driver);
+        framesPage = new FramesPage(getDriver());
 
         homePage.goToDesiredMenu("Alerts, Frame & Windows");
         commonPage.goToDesiredSubMenu("Frames");
-        javascriptHelpers.scrollDown(400);
+//        javascriptHelpers.scrollDown(400);
 
         framesPage.interactWithFrame1();
         framesPage.interactWithFrame2();
@@ -76,9 +67,6 @@ public class Frames extends ShareData {
 //
 //        framesMethods.switchToMainContent();
 
-        Thread.sleep(5000);
-        driver.quit();
 
     }
-
 }

@@ -4,6 +4,7 @@ import HelperMethods.AlertMethods;
 import HelperMethods.ElementsMethods;
 import HelperMethods.JavascriptHelpers;
 import HelperMethods.WindowsMethods;
+import Pages.BrowserWebPage;
 import Pages.CommonPage;
 import Pages.HomePage;
 import ShareData.ShareData;
@@ -20,39 +21,28 @@ import java.util.List;
 
 public class BrowserWindowsTab extends ShareData {
 
-
-    WindowsMethods windowsMethods;
-    ElementsMethods elementsMethods;
-    JavascriptHelpers javascriptHelpers;
     HomePage homePage;
     CommonPage commonPage;
-    BrowserWindowsTab browserWindowsTab;
+    BrowserWebPage browserWebPage;
 
 
     @Test
     public void automationMethod() {
 
-        elementsMethods = new ElementsMethods(driver);
 
-        windowsMethods = new WindowsMethods(driver);
-
-        javascriptHelpers = new JavascriptHelpers(driver);
-
-        homePage = new HomePage(driver);
-
-        commonPage = new CommonPage(driver);
-
-        javascriptHelpers.scrollDown(400);
-
+        homePage = new HomePage(getDriver());
+        commonPage = new CommonPage(getDriver());
+        browserWebPage = new BrowserWebPage(getDriver());
         homePage.goToDesiredMenu("Alerts, Frame & Windows");
-
         commonPage.goToDesiredSubMenu("Browser Windows");
+        browserWebPage.displayedTextFromNewTab();
+        browserWebPage.displayedTextFromWindow();
 
 
 
-        WebElement newTabButtonElement = driver.findElement(By.id("tabButton"));
-        elementsMethods.clickOnElement(newTabButtonElement);
-////
+//        WebElement newTabButtonElement = driver.findElement(By.id("tabButton"));
+//        elementsMethods.clickOnElement(newTabButtonElement);
+//////
 //        windowsMethods.switchToOpenedTab();
 //
 //       List<String> tablist = new ArrayList<>(driver.getWindowHandles());

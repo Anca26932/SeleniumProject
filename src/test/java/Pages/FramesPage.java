@@ -42,16 +42,16 @@ public class FramesPage extends CommonPage {
 
     // }
     @FindBy(id = "frame1")
-    WebElement frame1Element;
+    private WebElement frame1Element;
 
     @FindBy(id = "sampleHeading")
-    WebElement sampleHeadingFrame1Element;
+    private WebElement sampleHeadingFrame1Element;
 
     @FindBy(id = "frame2")
-    WebElement frame2Element;
+    private WebElement frame2Element;
 
     @FindBy(id = "sampleHeading")
-    WebElement sampleHeadingFromFrame2Element;
+    private WebElement sampleHeadingFromFrame2Element;
 
     public FramesPage(WebDriver driver) {
         super(driver);

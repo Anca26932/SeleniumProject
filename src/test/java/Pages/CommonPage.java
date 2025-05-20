@@ -31,7 +31,7 @@ public class CommonPage {
 
     }
     @FindBy(xpath = "//span[@class='text']")
-    List<WebElement> elementsField;
+    private List<WebElement> elementsField;
 
     public void goToDesiredSubMenu(String submenu){
         javascriptHelpers.scrollDown(400);

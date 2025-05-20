@@ -1,26 +1,13 @@
 package Tests;
 
-import HelperMethods.AlertMethods;
-import HelperMethods.ElementsMethods;
-import HelperMethods.JavascriptHelpers;
 import Pages.AlertsPage;
 import Pages.CommonPage;
 import Pages.HomePage;
 import ShareData.ShareData;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 public class AlertTest extends ShareData {
 
-    ElementsMethods elementsMethods;
-    AlertMethods alertMethods;
-    JavascriptHelpers javascriptHelpers;
     HomePage homePage;
     CommonPage commonPage;
     AlertsPage alertsPage;
@@ -29,12 +16,9 @@ public class AlertTest extends ShareData {
     @Test
     public void automationMethod() {
 
-        elementsMethods = new ElementsMethods(driver);
-        alertMethods = new AlertMethods(driver);
-        javascriptHelpers = new JavascriptHelpers(driver);
-        homePage = new HomePage(driver);
-        commonPage = new CommonPage(driver);
-        alertsPage = new AlertsPage(driver);
+        homePage = new HomePage(getDriver());
+        commonPage = new CommonPage(getDriver());
+        alertsPage = new AlertsPage(getDriver());
 
 //        javascriptHelpers.scrollDown(400);
 
@@ -59,7 +43,7 @@ public class AlertTest extends ShareData {
 //        alertMethods.interactWithAlertsOK();
 
 //        Definim un wait explicit ca sa astepte dupa alerta
-        //WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+//        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 //        wait.until(ExpectedConditions.alertIsPresent());
 //        Alert alertDelayOK = driver.switchTo().alert();
 //        alertDelayOK.accept();

@@ -1,12 +1,8 @@
 package Pages;
 
-import HelperMethods.ElementsMethods;
-import HelperMethods.JavascriptHelpers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,55 +24,55 @@ public class PracticeFormPage extends CommonPage {
 //    }
 
     @FindBy(id = "firstName")
-    WebElement firstNameElement;
+    private WebElement firstNameElement;
 
     @FindBy(id = "lastName")
-    WebElement lastNameElement;
+    private WebElement lastNameElement;
 
     @FindBy(id = "userEmail")
-    WebElement emailElement;
+    private WebElement emailElement;
 
     @FindBy(css = "input[placeholder='Mobile Number']")
-    WebElement mobileNumberElement;
+    private WebElement mobileNumberElement;
 
     @FindBy(id = "uploadPicture")
-    WebElement uploadPictureElement;
+    private WebElement uploadPictureElement;
 
     @FindBy(xpath = "//label[@for='gender-radio-1']")
-    WebElement maleGenderElement;
+    private WebElement maleGenderElement;
 
     @FindBy(xpath = "//label[@for='gender-radio-2']")
-    WebElement femaleGenderElement;
+    private WebElement femaleGenderElement;
 
     @FindBy(xpath = "//label[@for='gender-radio-3']")
-    WebElement otherGenderElement;
+    private WebElement otherGenderElement;
 
     @FindBy(id = "currentAddress")
-    WebElement currentAddressElement;
+    private WebElement currentAddressElement;
 
     @FindBy(id = "react-select-3-input")
-    WebElement stateElement;
+    private WebElement stateElement;
 
     @FindBy(id = "react-select-4-input")
-    WebElement cityElement;
+    private WebElement cityElement;
 
     @FindBy(xpath = "//label[@for='hobbies-checkbox-1']")
-    WebElement sportsElement;
+    private WebElement sportsElement;
 
     @FindBy(xpath = "//label[@for='hobbies-checkbox-2']")
-    WebElement readingElement;
+    private WebElement readingElement;
 
     @FindBy(xpath = "//label[@for='hobbies-checkbox-3']")
-    WebElement musicElement;
+    private WebElement musicElement;
 
     @FindBy(xpath = "//div[@id='subjectsContainer']")
-    WebElement subjectsElement;
+    private WebElement subjectsElement;
 
     @FindBy(id = "uploadPicture")
-    WebElement pictureElement;
+    private WebElement pictureElement;
 
-    @FindBy(id="submit")
-    WebElement submitElement;
+    @FindBy(id = "submit")
+    private WebElement submitElement;
 
     public PracticeFormPage(WebDriver driver) {
         super(driver);
@@ -119,28 +115,34 @@ public class PracticeFormPage extends CommonPage {
 
 
     }
-    public void uploadPicture(WebElement element){ elementsMethods.uploadPicture(pictureElement);
+
+    public void uploadPicture(WebElement element) {
+        elementsMethods.uploadPicture(pictureElement);
 
     }
-    public void completeHobbies(List<String> hobbies){
+
+    public void completeHobbies(List<String> hobbies) {
         List<WebElement> hobbiesElement = new ArrayList<>();
-                hobbiesElement.add(sportsElement);
-                hobbiesElement.add(readingElement);
-                hobbiesElement.add(musicElement);
-                elementsMethods.clickMultipleValue(hobbiesElement ,hobbies);
+        hobbiesElement.add(sportsElement);
+        hobbiesElement.add(readingElement);
+        hobbiesElement.add(musicElement);
+        elementsMethods.clickMultipleValue(hobbiesElement, hobbies);
+        javascriptHelpers.scroll(0, 400);
 
     }
-    public void completeState(String state, String city){
+
+    public void completeState(String state, String city) {
         javascriptHelpers.forceClick(stateElement);
 //        elementsMethods.clickOnElement(stateElement);
         elementsMethods.waitForVisibilityElement(stateElement);
-        elementsMethods.fillWithActions(stateElement , state);
+        elementsMethods.fillWithActions(stateElement, state);
         javascriptHelpers.forceClick(stateElement);
 //        elementsMethods.clickOnElement(cityElement);
         elementsMethods.waitForVisibilityElement(cityElement);
-        elementsMethods.fillWithActions(cityElement,city);
+        elementsMethods.fillWithActions(cityElement, city);
     }
-    public void submit(){
+
+    public void submit() {
         submitElement.submit();
     }
 

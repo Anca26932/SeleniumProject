@@ -1,26 +1,15 @@
 package Tests;
 
-import HelperMethods.ElementsMethods;
-import HelperMethods.JavascriptHelpers;
 import Pages.CommonPage;
 import Pages.HomePage;
 import Pages.PracticeFormPage;
 import ShareData.ShareData;
-import net.bytebuddy.asm.Advice;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeFormTest extends ShareData {
-
-    ElementsMethods elementMethods;
-
-    JavascriptHelpers javascriptHelpers;
 
     HomePage homePage;
 
@@ -31,23 +20,16 @@ public class PracticeFormTest extends ShareData {
     @Test
     public void automationMethod() throws InterruptedException {
 
+        homePage = new HomePage(getDriver());
 
-        elementMethods = new ElementsMethods(driver);
+        commonPage = new CommonPage(getDriver());
 
-        javascriptHelpers = new JavascriptHelpers(driver);
-
-        homePage = new HomePage(driver);
-
-        commonPage = new CommonPage(driver);
-
-        practiceFormPage = new PracticeFormPage(driver);
-
+        practiceFormPage = new PracticeFormPage(getDriver());
 
         homePage.goToDesiredMenu("Forms");
 
         commonPage.goToDesiredSubMenu("Practice Form");
-
-        javascriptHelpers.scrollDown(400);
+//        javascriptHelpers.scrollDown(400);
 
 
         practiceFormPage.completeFirstRegion("Anca", "Creta", "anca.creta@yahoo.com", "Razaoare 7B", "0737138519");
@@ -65,8 +47,7 @@ public class PracticeFormTest extends ShareData {
         hobbies.add("Reading");
 
         practiceFormPage.completeHobbies(hobbies);
-
-        practiceFormPage.completeState("NCR","New-Delhi");
+        practiceFormPage.completeState("NCR", "New-Delhi");
         practiceFormPage.submit();
 
 

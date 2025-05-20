@@ -28,13 +28,13 @@ public class BrowserWebPage extends CommonPage {
 //    }
 
     @FindBy(id="tabButton")
-    WebElement newTabButtonElement;
+    private WebElement newTabButtonElement;
 
     @FindBy(id="sampleHeading")
-    WebElement sampleHeadingElement;
+    private WebElement sampleHeadingElement;
 
     @FindBy(id="windowButton")
-    WebElement windowButtonElement;
+    private WebElement windowButtonElement;
 
     public BrowserWebPage(WebDriver driver) {
         super(driver);

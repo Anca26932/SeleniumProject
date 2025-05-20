@@ -23,25 +23,25 @@ public class WebTablePage extends CommonPage {
 //        PageFactory.initElements(driver,this);
 //    }
     @FindBy(id="addNewRecordButton")
-    WebElement addNewRecoordButton;
+    private WebElement addNewRecoordButton;
 
     @FindBy(id="firstName")
-    WebElement firstNamefield;
+    private WebElement firstNamefield;
 
     @FindBy(id="lastName")
-    WebElement lastNamefield;
+    private  WebElement lastNamefield;
 
     @FindBy(id="userEmail")
-    WebElement emailField;
+    private WebElement emailField;
 
     @FindBy(id="age")
-    WebElement ageField;
+    private WebElement ageField;
     @FindBy(id="salary")
-    WebElement salaryfield;
+    private WebElement salaryfield;
     @FindBy(id="department")
-    WebElement departmentField;
+    private WebElement departmentField;
     @FindBy(id="submit")
-    WebElement submitField;
+    private WebElement submitField;
 
 
     public WebTablePage(WebDriver driver) {

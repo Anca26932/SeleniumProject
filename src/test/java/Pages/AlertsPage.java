@@ -32,16 +32,16 @@ public class AlertsPage extends CommonPage {
 //    }
 
     @FindBy(id = "alertButton")
-    WebElement alertOKElement;
+    private WebElement alertOKElement;
 
     @FindBy(id = "timerAlertButton")
-    WebElement alertDeLayButton;
+    private WebElement alertDeLayButton;
 
     @FindBy(id = "confirmButton")
-    WebElement alertConfirmationButton;
+    private WebElement alertConfirmationButton;
 
     @FindBy(id = "promtButton")
-    WebElement alertPromptButton;
+    private  WebElement alertPromptButton;
 
     public AlertsPage(WebDriver driver) {
         super(driver);

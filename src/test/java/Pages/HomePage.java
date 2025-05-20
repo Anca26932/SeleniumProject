@@ -24,7 +24,7 @@ public class HomePage extends CommonPage {
     // Identificam web elementele specifice pentru pagina
 
     @FindBy(xpath = "//h5")
-    List<WebElement> elementsField;
+    private List<WebElement> elementsField;
 
     public HomePage(WebDriver driver) {
         super(driver);
