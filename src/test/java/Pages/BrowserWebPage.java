@@ -13,10 +13,10 @@ import javax.swing.*;
 
 public class BrowserWebPage extends CommonPage {
 //    WebDriver driver;
-//    ElementsMethods elementsMethods;
+    ElementsMethods elementsMethods;
 //    JavascriptHelpers javascriptHelpers;
 //    Actions actions;
-//    WindowsMethods windowsMethods;
+    WindowsMethods windowsMethods;
 
 //    public BrowserWebPage(WebDriver driver){
 //        this.driver = driver;
@@ -37,11 +37,13 @@ public class BrowserWebPage extends CommonPage {
     private WebElement windowButtonElement;
 
     public BrowserWebPage(WebDriver driver) {
+
         super(driver);
     }
+
     public void displayedTextFromNewTab(){
-        elementsMethods.clickOnElement(newTabButtonElement);
         windowsMethods.switchToOpenedTab();
+        elementsMethods.clickOnElement(newTabButtonElement);
         elementsMethods.displayContentOfElement(sampleHeadingElement);
     }
     public void displayedTextFromWindow(){

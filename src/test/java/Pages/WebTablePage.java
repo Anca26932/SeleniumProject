@@ -36,10 +36,13 @@ public class WebTablePage extends CommonPage {
 
     @FindBy(id="age")
     private WebElement ageField;
+
     @FindBy(id="salary")
     private WebElement salaryfield;
+
     @FindBy(id="department")
     private WebElement departmentField;
+
     @FindBy(id="submit")
     private WebElement submitField;
 

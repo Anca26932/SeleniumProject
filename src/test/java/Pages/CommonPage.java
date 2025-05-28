@@ -11,13 +11,19 @@ import java.util.List;
 
 public class CommonPage {
 
-    WebDriver driver;
-    ElementsMethods elementsMethods;
-    JavascriptHelpers javascriptHelpers;
-    AlertMethods alertMethods;
-    Actions actions;
-    WindowsMethods windowsMethods;
-    FramesMethods framesMethods;
+   protected WebDriver driver;
+
+    protected ElementsMethods elementsMethods;
+
+    protected JavascriptHelpers javascriptHelpers;
+
+    protected AlertMethods alertMethods;
+
+    protected Actions actions;
+
+    protected WindowsMethods windowsMethods;
+
+    protected FramesMethods framesMethods;
 
 
     public CommonPage(WebDriver driver) {
