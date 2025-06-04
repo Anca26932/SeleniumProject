@@ -15,10 +15,15 @@ public class DriverConfigNode {
 
     @XmlElement(name = "Headless")
     public String headless;
+
     @XmlElement(name = "Resolution")
     public String resolution;
+
     @XmlElement(name = "Gpu")
     public String gpu;
+
+    @XmlElement(name = "Exstention")
+    public String exstention;
 
 
 

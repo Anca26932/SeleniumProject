@@ -11,6 +11,13 @@ on:
         required: true
         default: RegressionSuite
 
+    browser:
+      description: 'Choose browser suite:chrome, edge, firefox'
+      required: true
+      defalut: chrome
+
+
+
 
 jobs:
   build:
@@ -29,7 +36,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Run automation suite
-      run: mvn clean install -DsuiteXmlFile=suites/${{ github.event.inputs.suite}} -PCustomSuite
+      run: mvn clean install -DciCd=true -Dbrowser=${{ github.event.inputs.browser}} -DsuiteXmlFile=suites/${{ github.event.inputs.suite}} -PCustomSuite
 
 
 
